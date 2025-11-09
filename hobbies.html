@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hobbies | Ayush Baral</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ===== Base ===== */
+    body {
+      font-family: "Inter", sans-serif;
+      background: #fff;
+      color: #222;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ===== Header ===== */
+    header {
+      background: #003366;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+
+    nav a:hover,
+    nav .active {
+      text-decoration: underline;
+    }
+
+    /* ===== Main ===== */
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .hobbies-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hobbies-section h2 {
+      color: #003366;
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .hobbies-section p {
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== Hobby Grid ===== */
+    .hobby-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .hobby-card {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hobby-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .main-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease, transform 0.6s ease;
+    }
+
+    .caption {
+      margin-top: 12px;
+      font-weight: 600;
+      color: #003366;
+      font-size: 1.05rem;
+    }
+
+    /* ===== Popup Overlay ===== */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 9999;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== Mini-Gallery ===== */
+    .mini-grid {
+      display: none;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      width: 85vmin;
+      height: 85vmin;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-auto-rows: 220px;
+      gap: 16px;
+      align-items: stretch;
+      justify-items: stretch;
+      place-items: center;
+    }
+
+    .mini-grid:has(:nth-child(2):last-child) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      height: 85vmin;
+    }
+
+    .popup-overlay.active .mini-grid {
+      display: grid;
+    }
+
+    .mini-grid img,
+    .mini-grid video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      background-color: #000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+    }
+
+    .mini-grid img:hover,
+    .mini-grid video:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    /* ===== Strava Button ===== */
+    .strava-link {
+      margin-top: 50px;
+      display: inline-block;
+      padding: 10px 18px;
+      background-color: #fc4c02;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .strava-link:hover {
+      background-color: #d83e00;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      background: #f0f0f0;
+      padding: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .mini-grid {
+        width: 90vmin;
+        height: 90vmin;
+      }
+
+      .mini-grid:has(:nth-child(2):last-child) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.2rem; }
+      h2 { font-size: 1rem; }
+      p  { font-size: 0.9rem; }
+
+      .strava-link {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Hobbies</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="work_experience.html">Work Experience</a>
+      <a href="research.html">Projects, Presentations and Research</a>
+      <a href="cv.html">CV</a>
+      <a href="hobbies.html" class="active">Hobbies</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hobbies-section">
+      <h2>Outside of Data Science</h2>
+      <p>
+        Staying active and creative keeps me grounded — whether I’m running long distances,
+        playing football, hiking in the wilderness, exploring museums, or experimenting with new recipes.
+      </p>
+
+      <div class="hobby-grid">
+        <div class="hobby-card" data-gallery="running-gallery">
+          <img src="pictures/running/running_main.PNG" alt="Running" class="main-photo">
+          <div class="caption">Running</div>
+        </div>
+
+        <div class="hobby-card" data-gallery="football-gallery">
+          <img src="pictures/football/football_main.HEIC" alt="Football" class="main-photo">
+          <div class="caption">Football</div>
+        </div>
+
+        <div class="hobby-card" data-gallery="hiking-gallery">
+          <img src="pictures/wilderness/wilderness_main.HEIC" alt="Hiking" class="main-photo">
+          <div class="caption">Hiking</div>
+        </div>
+
+        <div class="hobby-card" data-gallery="cooking-gallery">
+          <img src="pictures/cooking_and_eating/food_main.HEIC" alt="Cooking" class="main-photo">
+          <div class="caption">Cooking</div>
+        </div>
+
+        <div class="hobby-card" data-gallery="museum-gallery">
+          <img src="pictures/museums/museum_main.HEIC" alt="Museum" class="main-photo">
+          <div class="caption">Museums</div>
+        </div>
+      </div>
+
+      <a href="https://www.strava.com/athletes/134677636?utm_source=ios_share&utm_medium=social&share_sig=45BB24EC1762674030&_branch_match_id=1392185931676900606&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXLy4pSixL1EssKNDLyczL1k%2FMcC4riCzOtoxIsq8rSk1LLSrKzEuPTyrKLy9OLbINTkxLLMoEALSO5xk9AAAA" 
+         target="_blank" class="strava-link">
+        I would love to run with you →
+      </a>
+    </section>
+  </main>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popup">
+    <!-- Running -->
+    <div class="mini-grid gallery" id="running-gallery">
+      <img src="pictures/running/running_1.PNG" alt="Run1">
+      <video src="pictures/running/running_2.MOV" autoplay muted loop playsinline></video>
+    </div>
+
+    <!-- Football -->
+    <div class="mini-grid gallery" id="football-gallery">
+      <video src="pictures/football/football_1.MOV" autoplay muted loop playsinline></video>
+      <img src="pictures/football/football_2.png" alt="Match2">
+    </div>
+
+    <!-- Hiking -->
+    <div class="mini-grid gallery" id="hiking-gallery">
+      <img src="pictures/wilderness/wilderness_1.jpeg" alt="Trail">
+      <img src="pictures/wilderness/wilderness_2.HEIC" alt="View2">
+      <img src="pictures/wilderness/wilderness_3.HEIC" alt="View3">
+      <img src="pictures/wilderness/wilderness_4.HEIC" alt="View4">
+      <img src="pictures/wilderness/wilderness_5.HEIC" alt="View5">
+      <img src="pictures/wilderness/wilderness_6.HEIC" alt="View6">
+    </div>
+
+    <!-- Cooking -->
+    <div class="mini-grid gallery" id="cooking-gallery">
+      <img src="pictures/cooking_and_eating/food_1.JPG" alt="Dish1">
+      <img src="pictures/cooking_and_eating/food_2.HEIC" alt="Dish2">
+      <img src="pictures/cooking_and_eating/food_3.JPG" alt="Dish3">
+    </div>
+
+    <!-- Museums -->
+    <div class="mini-grid gallery" id="museum-gallery">
+      <img src="pictures/museums/museum_1.HEIC" alt="Blindman's Meal">
+      <img src="pictures/museums/museum_2.HEIC" alt="Shiva & Parvati">
+      <img src="pictures/museums/museum_3.HEIC" alt="Tara">
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Ayush Baral | Hosted on GitHub Pages</p>
+  </footer>
+
+  <script>
+    const popup = document.getElementById('popup');
+    const galleries = document.querySelectorAll('.gallery');
+    const hobbySection = document.querySelector('.hobbies-section');
+    let activeGallery = null;
+
+    document.querySelectorAll('.hobby-card').forEach(card => {
+      const galleryId = card.dataset.gallery;
+      const gallery = document.getElementById(galleryId);
+
+      card.addEventListener('mouseenter', () => {
+        galleries.forEach(g => g.style.display = 'none');
+        gallery.style.display = 'grid';
+        popup.classList.add('active');
+        activeGallery = gallery;
+      });
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const bounds = hobbySection.getBoundingClientRect();
+      const inside =
+        e.clientX >= bounds.left &&
+        e.clientX <= bounds.right &&
+        e.clientY >= bounds.top &&
+        e.clientY <= bounds.bottom;
+
+      if (!inside && popup.classList.contains('active')) closePopup();
+    });
+
+    function closePopup() {
+      popup.classList.remove('active');
+      galleries.forEach(g => g.style.display = 'none');
+      activeGallery = null;
+    }
+  </script>
+</body>
+</html>

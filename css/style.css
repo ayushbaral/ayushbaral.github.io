@@ -1,0 +1,226 @@
+/* ===== Base ===== */
+body {
+    font-family: "Inter", sans-serif;
+    background: #fff;
+    color: #222;
+    margin: 0;
+    line-height: 1.6;
+  }
+  
+  /* ===== Header ===== */
+  header {
+    background: #003366;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+  }
+  
+  nav a:hover,
+  nav .active {
+    text-decoration: underline;
+  }
+  
+  /* ===== Main ===== */
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .photo-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .photo-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* ===== Profile Photo ===== */
+  .profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;  /* show Dhaka Topi clearly */
+    border: 3px solid #003366;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ===== Curved Arrow & Label ===== */
+  .top-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    animation: floatLabel 3s ease-in-out infinite;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .curved-arrow {
+    width: 100px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+  
+  /* ===== Label Text (desktop) ===== */
+  .label-text {
+    color: #003366;
+    font-weight: 700;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding-top: 35px;
+  }
+  
+  /* ===== Animations ===== */
+  @keyframes floatLabel {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  /* ===== Text & Buttons ===== */
+  .intro {
+    text-align: center;
+  }
+  
+  h2 {
+    color: #003366;
+    margin-top: 1rem;
+  }
+  
+  a.button {
+    display: inline-block;
+    background: #003366;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+  
+  a.button:hover {
+    background: #0055a5;
+  }
+  
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    background: #f0f0f0;
+    padding: 1rem;
+    color: #555;
+    font-size: 0.9rem;
+  }
+  
+  /* ===== Responsive (Tablet) ===== */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    nav a {
+      margin: 0.5rem;
+      font-size: 0.95rem;
+    }
+  
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      object-position: center 15%;
+    }
+  
+    .top-label {
+      top: -20px;
+      width: 350px;
+    }
+  
+    .curved-arrow {
+      width: 90px;
+      height: 55px;
+    }
+  
+    .label-text {
+      font-size: 0.85rem;
+      padding-top: 30px;
+    }
+  }
+  
+  /* ===== Responsive (Mobile) ===== */
+  @media (max-width: 480px) {
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      object-position: center 10%;
+    }
+  
+    .top-label {
+      top: -20px;
+      width: 300px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .curved-arrow {
+      width: 85px;
+      height: 50px;
+    }
+  
+    .label-text {
+      font-size: 0.85rem;
+      white-space: normal;
+      padding-top: 5px;
+      padding-left: 10px;
+    }
+  
+    h1 { font-size: 1.2rem; }
+    h2 { font-size: 1rem; }
+    p  { font-size: 0.9rem; }
+  }
+
+  .download-btn {
+    display: inline-block;
+    background: #003366;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+
+  .download-btn:hover {
+    background: #0055a5;
+  }
+      
+  
